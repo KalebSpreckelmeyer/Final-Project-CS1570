@@ -4,11 +4,14 @@
 class Map
 {
 public:
-	char terrainMap[5][5];
+	char terrainMap[12][12];
+	char itemMap[12][12];
 	int playerX;
 	int playerY;
 	int enemyX;
 	int enemyY;
+	int allyCoords[2][2];
+
 	//Default constructor, generates terrain map randomly (seeded in main)
 	Map();
 	//Destructor

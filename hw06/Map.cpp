@@ -10,68 +10,33 @@ Map::Map()
 	//Character array to reference when setting each tile of the map
 	char charArray[5] = { 'F', 'M', 'P', 'W', 'S' };
 
-	bool validMap = false;
-	do
-	{
-		for (int i = 0; i < 5; i++)
-		{
-			for (int j = 0; j < 5; j++)
-			{
-				//Generate random number from 1 - 5 
-				int randNum = (rand() % 5);
-				terrainMap[i][j] = charArray[randNum];
-			}
-		}
+	for (int i = 0; i < 12; ++i) {
+		for (int j = 0; j < 12; ++j) {
+			char newChar;
+			bool valid;
+			do {
+				valid = true;
+				newChar = charArray[rand() % 5];
 
-		//Step through the map and check each tile for criteria, changing them if necessary
-		int invalidChars = 0;
-		for (int i = 0; i < 5; i++)
-		{
-			for (int j = 0; j < 5; j++)
-			{
-				if (i != 0)
-				{
-					if (terrainMap[i - 1][j] == terrainMap[i][j])
-					{
-						invalidChars++;
-						break;
-					}
-				}
-				if (i != 4)
-				{
-					if (terrainMap[i + 1][j] == terrainMap[i][j])
-					{
-						invalidChars++;
-						break;
-					}
-				}
-				if (j != 0)
-				{
-					if (terrainMap[i][j - 1] == terrainMap[i][j])
-					{
-						invalidChars++;
-						break;
-					}
-				}
-				if (j != 4)
-				{
-					if (terrainMap[i][j + 1] == terrainMap[i][j])
-					{
-						invalidChars++;
-						break;
-					}
-				}
-			}
+				// Check above
+				if (i > 0 && terrainMap[i - 1][j] == newChar)
+					valid = false;
+				// Check left
+				if (j > 0 && terrainMap[i][j - 1] == newChar)
+					valid = false;
+
+			} while (!valid);
+
+			terrainMap[i][j] = newChar;
 		}
-		if (invalidChars == 0) validMap = true;
-	} while (!validMap);
+	}
 	setContestantPositions();
 }
 
 Map::~Map() {
-	for (int i = 0; i < 5; i++)
+	for (int i = 0; i < 12; i++)
 	{
-		for (int j = 0; j < 5; j++)
+		for (int j = 0; j < 12; j++)
 		{
 			terrainMap[j][j] = ' ';
 		}
@@ -80,9 +45,9 @@ Map::~Map() {
 void Map::printMap(Contestant contestant) const {
 	if (contestant.getIsPlayer())
 	{
-		for (int i = 0; i < 5; i++)
+		for (int i = 0; i < 12; i++)
 		{
-			for (int j = 0; j < 5; j++)
+			for (int j = 0; j < 12; j++)
 			{
 				if (j == playerX && i == playerY)
 				{
@@ -90,7 +55,10 @@ void Map::printMap(Contestant contestant) const {
 				}
 				else if (j == enemyX && i == enemyY)
 				{
-					std::cout << 'E';
+					if (abs(enemyX - playerX) <= 1 && abs(enemyY - playerY) <= 1)
+						std::cout << 'E';
+					else
+						std::cout << terrainMap[j][i];
 				}
 				else
 				{
@@ -102,9 +70,9 @@ void Map::printMap(Contestant contestant) const {
 	}
 	else
 	{
-		for (int i = 0; i < 5; i++)
+		for (int i = 0; i < 12; i++)
 		{
-			for (int j = 0; j < 5; j++)
+			for (int j = 0; j < 12; j++)
 			{
 				if (i == enemyX && j == enemyY)
 				{
@@ -121,12 +89,12 @@ void Map::printMap(Contestant contestant) const {
 }
 
 void Map::setContestantPositions() {
-	int randX = (rand() % 5);
-	int randY = (rand() % 5);
+	int randX = (rand() % 12);
+	int randY = (rand() % 12);
 	playerX = randX;
 	playerY = randY;
-	randX = (rand() % 5);
-	randY = (rand() % 5);
+	randX = (rand() % 12);
+	randY = (rand() % 12);
 	enemyX = randX;
 	enemyY = randY;
 }
@@ -140,9 +108,9 @@ Map Map::generateVisibleMap(Contestant contestant) {
 		tempMap.playerY = playerY;
 		tempMap.enemyX = enemyX;
 		tempMap.enemyY = enemyY;
-		for (int i = 0; i < 5; i++)
+		for (int i = 0; i < 12; i++)
 		{
-			for (int j = 0; j < 5; j++)
+			for (int j = 0; j < 12; j++)
 			{
 				if (abs(i - playerX) > 1)
 				{
@@ -169,9 +137,9 @@ Map Map::generateVisibleMap(Contestant contestant) {
 		tempMap.playerY = playerY;
 		tempMap.enemyX = enemyX;
 		tempMap.enemyY = enemyY;
-		for (int i = 0; i < 5; i++)
+		for (int i = 0; i < 12; i++)
 		{
-			for (int j = 0; j < 5; j++)
+			for (int j = 0; j < 12; j++)
 			{
 				if (abs(i - enemyX) > 1)
 				{

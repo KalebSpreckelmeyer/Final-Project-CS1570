@@ -1,8 +1,8 @@
 //Programmer: Kaleb Spreckelmeyer
-//Date: 5/6/2025
+//Date: 5/8/2025
 //File: main.cpp
-//Assignment: HW7
-//Purpose: This will contain a turn based Codemon game
+//Assignment: Final Project
+//Purpose: This will contain a turn based Codemon game in its final form
 
 #include <iostream>
 #include <string>
@@ -582,7 +582,7 @@ void playerTurn(Map& map, Contestant player, Contestant enemy, Codemon& activePl
 			}
 			else if (moveChoice == 's' || moveChoice == 'S')
 			{
-				if (map.playerY == 4)
+				if (map.playerY == 11)
 				{
 					cout << "You cannot move further down" << endl;
 				}
@@ -594,7 +594,7 @@ void playerTurn(Map& map, Contestant player, Contestant enemy, Codemon& activePl
 			}
 			else if (moveChoice == 'd' || moveChoice == 'D')
 			{
-				if (map.playerX == 4)
+				if (map.playerX == 11)
 				{
 					cout << "You cannot move further right" << endl;
 				}
@@ -619,7 +619,7 @@ void playerTurn(Map& map, Contestant player, Contestant enemy, Codemon& activePl
 			}
 			else if (moveChoice == 'e' || moveChoice == 'E')
 			{
-				if (map.playerX == 4 || map.playerY == 0)
+				if (map.playerX == 11 || map.playerY == 0)
 				{
 					cout << "You cannot move diagonally up right" << endl;
 				}
@@ -632,20 +632,20 @@ void playerTurn(Map& map, Contestant player, Contestant enemy, Codemon& activePl
 			}
 			else if (moveChoice == 'z' || moveChoice == 'Z')
 			{
-				if (map.playerX == 4 || map.playerY == 0)
+				if (map.playerX == 11 || map.playerY == 0)
 				{
 					cout << "You cannot move diagonally down left" << endl;
 				}
 				else
 				{
 					validMoveChoice = true;
-					map.playerX += 1;
-					map.playerY -= 1;
+					map.playerX -= 1;
+					map.playerY += 1;
 				}
 			}
 			else if (moveChoice == 'c' || moveChoice == 'C')
 			{
-				if (map.playerX == 4 || map.playerY == 4)
+				if (map.playerX == 11 || map.playerY == 4)
 				{
 					cout << "You cannot move diagonally down right" << endl;
 				}
@@ -757,7 +757,7 @@ void enemyTurn(Map& map, Contestant player, Contestant enemy, Codemon& activePla
 			}
 			else if (moveChoice == 3)
 			{
-				if (map.enemyY == 4)
+				if (map.enemyY == 11)
 				{
 				}
 				else
@@ -768,7 +768,7 @@ void enemyTurn(Map& map, Contestant player, Contestant enemy, Codemon& activePla
 			}
 			else if (moveChoice == 4)
 			{
-				if (map.enemyX == 4)
+				if (map.enemyX == 11)
 				{
 				}
 				else
@@ -791,7 +791,7 @@ void enemyTurn(Map& map, Contestant player, Contestant enemy, Codemon& activePla
 			}
 			else if (moveChoice == 6)
 			{
-				if (map.enemyX == 4 || map.enemyY == 0)
+				if (map.enemyX == 11 || map.enemyY == 0)
 				{
 				}
 				else
@@ -803,19 +803,19 @@ void enemyTurn(Map& map, Contestant player, Contestant enemy, Codemon& activePla
 			}
 			else if (moveChoice == 7)
 			{
-				if (map.enemyX == 4 || map.enemyY == 0)
+				if (map.enemyX == 11 || map.enemyY == 0)
 				{
 				}
 				else
 				{
 					validMoveChoice = true;
-					map.enemyX += 1;
-					map.enemyY -= 1;
+					map.enemyX -= 1;
+					map.enemyY += 1;
 				}
 			}
 			else if (moveChoice == 8)
 			{
-				if (map.enemyX == 4 || map.enemyY == 4)
+				if (map.enemyX == 11 || map.enemyY == 4)
 				{
 				}
 				else
